@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "541822092454",
+    "firebase_url": "https://sondaggi-1274b.firebaseio.com",
+    "project_id": "sondaggi-1274b",
+    "storage_bucket": "sondaggi-1274b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:541822092454:android:4c194d2d8be7b03b",
+        "android_client_info": {
+          "package_name": "it.sss.startup.startup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "541822092454-fufp4ej8qjgb0srp2en25h5cjgqpo564.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "it.sss.startup.startup",
+            "certificate_hash": "49c7a2728323c055b9954ec611f6695a7f3fa0ef"
+          }
+        },
+        {
+          "client_id": "541822092454-btie84mnuve3minbi1in7t7otuv7qp1r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLjp31kwnxpbT40Tv1KsPj8nHIA_giwUo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "541822092454-btie84mnuve3minbi1in7t7otuv7qp1r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
