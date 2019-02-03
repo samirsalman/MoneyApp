@@ -1,0 +1,21 @@
+[
+  {"tipo" : "Cibo",
+  "icona" : "fastfood"},
+
+  {"tipo" : "Svago",
+    "icona" : "videogame_asset"},
+
+  {"tipo" : "Benessere",
+    "icona" : "home"},
+
+  {"tipo" : "Abbigliamento",
+    "icona" : "shopping_cart"},
+
+  {"tipo" : "Spese domestiche",
+    "icona" : "home"},
+
+  {"tipo" : "Scommesse",
+    "icona" : "attach_money"},
+
+  {"tipo" : "Viaggio",
+    "icona" : "airplanemode_active"}  ]

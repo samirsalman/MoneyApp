@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:startup/newCost.dart';
 import 'Fonts.dart';
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
@@ -10,10 +12,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'App',
+      title: 'MyMoney',
       theme: ThemeData(
           primaryColor: Colors.orange, buttonColor: Colors.orangeAccent),
-      home: MyHomePage(title: 'Sondaggi'),
+      home: MyHomePage(title: 'MyMoney'),
     );
   }
 }
@@ -28,7 +30,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _currentIndex = 1;
+  int _currentIndex = 0;
 
   List<TabData> _bottomItems = [
     TabData(iconData: Icons.home, title: "Home"),
@@ -45,14 +47,16 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    SystemChrome.setEnabledSystemUIOverlays([]);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          int a=0;
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => NuovaSpesa()));
         },
         elevation: 1.5,
         child: Icon(Icons.add),
@@ -78,34 +82,34 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: ListView(children: [
         _accountInfo("Samir", "Salman", null),
-        _moneyInfo(500.00),
+        _guadagni(500.00),
+        _spese(200.00),
       ]),
     );
   }
 
   Widget _accountInfo(String nome, String cognome, FileImage image) {
     return Container(
-      height: 220,
+      height: 200,
       margin: EdgeInsets.all(10),
       child: GradientCard(
         gradient: Gradients.hotLinear,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            Text(
-              nome,
-              style: Fonts.number,
+            Container(
+              margin: EdgeInsets.only(top: 10),
+              child: ClipOval(
+                  child: Image.network(
+                "https://image.freepik.com/icone-gratis/utente-maschio-close-up-forma-per-facebook_318-37635.jpg",
+                fit: BoxFit.cover,
+                width: 70.0,
+                height: 70.0,
+              )),
             ),
-            ClipOval(
-                child: Image.network(
-              "https://image.freepik.com/icone-gratis/utente-maschio-close-up-forma-per-facebook_318-37635.jpg",
-              fit: BoxFit.cover,
-              width: 70.0,
-              height: 70.0,
-            )),
             Text(
-              cognome,
-              style: Fonts.number,
+              nome + " " + cognome,
+              style: Fonts.numberBig,
             ),
           ],
         ),
@@ -113,9 +117,9 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _moneyInfo(double counter) {
+  Widget _guadagni(double counter) {
     return Container(
-      height: 180,
+      height: 100,
       margin: EdgeInsets.all(10),
       child: GradientCard(
         gradient: Gradients.coldLinear,
@@ -125,7 +129,36 @@ class _MyHomePageState extends State<MyHomePage> {
             Column(
               children: <Widget>[
                 Text(
-                  "Le tue finanze:",
+                  "I tuoi guadagni:",
+                  style: Fonts.title,
+                ),
+                Container(
+                  child: Text(
+                    counter.toString() + " €",
+                    style: Fonts.numberBig,
+                  ),
+                )
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _spese(double counter) {
+    return Container(
+      height: 100,
+      margin: EdgeInsets.all(10),
+      child: GradientCard(
+        gradient: Gradients.blush,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                Text(
+                  "Le tue spese:",
                   style: Fonts.title,
                 ),
                 Container(
