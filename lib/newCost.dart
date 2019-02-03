@@ -27,78 +27,96 @@ class _NuovaSpesaState extends State<NuovaSpesa> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
+            shape: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
             title: Text(
               "Aggiungi spesa",
               style: Fonts.numberBlackSmall,
             ),
-            content: ListView(
-              children: <Widget>[
-                _category(name, index),
-                TextField(
-                  decoration: InputDecoration(
-                    labelText: "Note",
+            content: ConstrainedBox(
+              constraints: BoxConstraints(maxHeight: 250),
+              child: ListView(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[Icon(icons[index]), Text(name)],
                   ),
-                  style: Fonts.paragraphBlack,
-                ),
-                Center(
-                    child: Container(child:Text(
-                  "Prezzo:",
-                  style: Fonts.paragraphBlack,
-                ),margin: EdgeInsets.only(top: 10),)),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: "Note",
+                    ),
+                    style: Fonts.paragraphBlack,
+                    maxLines: 1,
+                  ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          child: Text(
+                            "€",
+                            style: Fonts.numberBlack,
+                          ),
+                        ),
+                        Container(
+                          child: TextFormField(
+                            textAlign: TextAlign.center,
+                            keyboardType: TextInputType.number,
+                            style: Fonts.numberBlackSmall,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        style: BorderStyle.solid,
+                                        color: Colors.black,
+                                        width: 3))),
+                          ),
+                          width: 90,
+                        ),
+                        Container(
 
-                    children: <Widget>[
-                      Container(
-                        height: 40,
-                        margin: EdgeInsets.only(top: 5),
-                        child: Text(
-                          "€",
-                          style: Fonts.numberBlack,
+                          margin: EdgeInsets.only(top: 40),
+                          child: Text(
+                            ",",
+                            style: Fonts.numberBlack,
+                          ),
                         ),
-                      ),
-                      Container(
-                        height: 40,
-                        margin: EdgeInsets.only(top: 5),
-                        child: TextFormField(
-                          textAlign: TextAlign.center,
-                          keyboardType: TextInputType.number,
-                          style: Fonts.numberBlackSmall,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      style: BorderStyle.solid,
-                                      color: Colors.black,
-                                      width: 3))),
+                        Container(
+                          child: TextFormField(
+                            textAlign: TextAlign.center,
+                            keyboardType: TextInputType.number,
+                            style: Fonts.numberBlackSmall,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        style: BorderStyle.solid,
+                                        color: Colors.black,
+                                        width: 3))),
+                          ),
+                          width: 90,
                         ),
-                        width: 90,
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 45),
-                        child: Text(
-                          ",",
-                          style: Fonts.numberBlack,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 5),
-                        height: 40,
-                        child: TextFormField(
-                          textAlign: TextAlign.center,
-                          keyboardType: TextInputType.number,
-                          style: Fonts.numberBlackSmall,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      style: BorderStyle.solid,
-                                      color: Colors.black,
-                                      width: 3))),
-                        ),
-                        width: 90,
-                      ),
-                    ])
-              ],
+                      ])
+                ],
+              ),
             ),
+            actions: <Widget>[
+              ButtonBar(
+                alignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  RaisedButton(
+                    onPressed: () {},
+                    elevation: 4,
+                    color: Colors.orange,
+                    child: Text("Aggiungi", style: Fonts.numberBlackSmall),
+                  ),
+                  RaisedButton(
+                    onPressed: () {},
+                    elevation: 4,
+                    color: Colors.orange,
+                    child: Text(
+                      "Annulla",
+                      style: Fonts.numberBlackSmall,
+                    ),
+                  )
+                ],
+              )
+            ],
           );
         });
   }
@@ -155,6 +173,7 @@ class _NuovaSpesaState extends State<NuovaSpesa> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomPadding: false,
         appBar: AppBar(
           backgroundColor: Colors.white70,
           elevation: 5,
