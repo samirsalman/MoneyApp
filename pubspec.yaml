@@ -18,7 +18,7 @@ dependencies:
   firebase_auth:
   firebase_database:
   groovin_material_icons:
-  numberpicker:
+  flutter_fluid_slider:
 
   flutter:
     sdk: flutter

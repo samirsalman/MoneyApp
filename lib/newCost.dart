@@ -1,9 +1,9 @@
 import 'dart:convert';
-
+import 'item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:numberpicker/numberpicker.dart';
 import 'package:startup/Fonts.dart';
+import 'package:startup/addItem.dart';
 
 class NuovaSpesa extends StatefulWidget {
   @override
@@ -21,105 +21,6 @@ class _NuovaSpesaState extends State<NuovaSpesa> {
     Icons.attach_money,
     Icons.airplanemode_active
   ];
-
-  void _dialogCost(String name, int index) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            shape: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
-            title: Text(
-              "Aggiungi spesa",
-              style: Fonts.numberBlackSmall,
-            ),
-            content: ConstrainedBox(
-              constraints: BoxConstraints(maxHeight: 250),
-              child: ListView(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[Icon(icons[index]), Text(name)],
-                  ),
-                  TextField(
-                    decoration: InputDecoration(
-                      labelText: "Note",
-                    ),
-                    style: Fonts.paragraphBlack,
-                    maxLines: 1,
-                  ),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          child: Text(
-                            "€",
-                            style: Fonts.numberBlack,
-                          ),
-                        ),
-                        Container(
-                          child: TextFormField(
-                            textAlign: TextAlign.center,
-                            keyboardType: TextInputType.number,
-                            style: Fonts.numberBlackSmall,
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        style: BorderStyle.solid,
-                                        color: Colors.black,
-                                        width: 3))),
-                          ),
-                          width: 90,
-                        ),
-                        Container(
-
-                          margin: EdgeInsets.only(top: 40),
-                          child: Text(
-                            ",",
-                            style: Fonts.numberBlack,
-                          ),
-                        ),
-                        Container(
-                          child: TextFormField(
-                            textAlign: TextAlign.center,
-                            keyboardType: TextInputType.number,
-                            style: Fonts.numberBlackSmall,
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        style: BorderStyle.solid,
-                                        color: Colors.black,
-                                        width: 3))),
-                          ),
-                          width: 90,
-                        ),
-                      ])
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              ButtonBar(
-                alignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  RaisedButton(
-                    onPressed: () {},
-                    elevation: 4,
-                    color: Colors.orange,
-                    child: Text("Aggiungi", style: Fonts.numberBlackSmall),
-                  ),
-                  RaisedButton(
-                    onPressed: () {},
-                    elevation: 4,
-                    color: Colors.orange,
-                    child: Text(
-                      "Annulla",
-                      style: Fonts.numberBlackSmall,
-                    ),
-                  )
-                ],
-              )
-            ],
-          );
-        });
-  }
 
   Future<String> loadAsset() async {
     return await rootBundle.loadString('assets/item.json');
@@ -144,7 +45,10 @@ class _NuovaSpesaState extends State<NuovaSpesa> {
   Widget _category(String name, int index) {
     return GestureDetector(
         onTap: () {
-          _dialogCost(name, index);
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AddItem(icons, items, index)));
         },
         child: Container(
             height: 90,
@@ -177,10 +81,9 @@ class _NuovaSpesaState extends State<NuovaSpesa> {
         appBar: AppBar(
           backgroundColor: Colors.white70,
           elevation: 5,
-          title: new Image.asset(
-            "assets/logo.png",
-            width: 200,
-            height: 50,
+          title: Text(
+            "Categoria spesa",
+            style: Fonts.paragraphBlack,
           ),
           centerTitle: true,
         ),
@@ -191,20 +94,4 @@ class _NuovaSpesaState extends State<NuovaSpesa> {
           itemCount: items.length,
         ));
   }
-}
-
-class Item {
-  String name;
-  String icon;
-
-  Item(this.name, this.icon);
-
-  Item.fromJson(Map<String, dynamic> json)
-      : name = json['tipo'],
-        icon = json['icona'];
-
-  Map<String, dynamic> toJson() => {
-        'tipo': name,
-        'icona': icon,
-      };
 }
